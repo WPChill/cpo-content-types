@@ -1,0 +1,4 @@
+.column-ctct-image { width:80px; }
+.column-ctct-image img { border-radius:5px; }
+.type-cpo_testimonial .column-ctct-image img,
+.type-cpo_team .column-ctct-image img { border-radius:50px; }

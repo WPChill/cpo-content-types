@@ -57,6 +57,8 @@ require_once($core_path.'cposts/cpost_services.php');
 require_once($core_path.'cposts/cpost_team.php');
 require_once($core_path.'cposts/cpost_testimonials.php');
 require_once($core_path.'cposts/cpost_clients.php');
+// Custom Post Type Order
+require_once($core_path.'simple-custom-post-order.php');
 
 
 //Plugin activation hook

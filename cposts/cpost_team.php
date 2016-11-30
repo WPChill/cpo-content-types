@@ -30,7 +30,7 @@ function ctct_cpost_team(){
 	'hierarchical' => false,
 	'menu_icon' => 'dashicons-universal-access',
 	'menu_position' => null,
-	'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'page-attributes')); 
+	'supports' => array('title', 'editor', 'excerpt', 'thumbnail')); 
 	
 	register_post_type('cpo_team', $fields);
 }

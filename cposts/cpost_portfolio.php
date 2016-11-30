@@ -34,7 +34,7 @@ function ctct_cpost_portfolio(){
 	'menu_icon' => 'dashicons-portfolio',
 	'show_in_nav_menus' => true,
 	'menu_position' => null,
-	'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'comments')); 
+	'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'comments')); 
 	
 	register_post_type('cpo_portfolio', $fields);
 }

@@ -31,7 +31,7 @@ function ctct_cpost_features(){
 	'hierarchical' => false,
 	'menu_icon' => 'dashicons-star-filled',
 	'menu_position' => null,
-	'supports' => array('title', 'editor', 'thumbnail', 'page-attributes')); 
+	'supports' => array('title', 'editor', 'thumbnail')); 
 	
 	register_post_type('cpo_feature', $fields);
 }

@@ -31,7 +31,7 @@ function ctct_cpost_clients(){
 	'hierarchical' => false,
 	'menu_icon' => 'dashicons-businessman',
 	'menu_position' => null,
-	'supports' => array('title', 'excerpt', 'thumbnail', 'page-attributes')); 
+	'supports' => array('title', 'excerpt', 'thumbnail')); 
 	
 	register_post_type('cpo_client', $fields);
 }

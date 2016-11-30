@@ -34,7 +34,7 @@ function ctct_cpost_services(){
 	'menu_icon' => 'dashicons-archive',
 	'menu_position' => null,
 	'show_in_nav_menus' => true,
-	'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'page-attributes')); 
+	'supports' => array('title', 'editor', 'excerpt', 'thumbnail')); 
 	
 	register_post_type('cpo_service', $fields);
 }

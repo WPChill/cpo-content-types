@@ -31,7 +31,7 @@ function ctct_cpost_testimonials(){
 	'hierarchical' => false,
 	'menu_icon' => 'dashicons-format-chat',
 	'menu_position' => null,
-	'supports' => array('title', 'editor', 'thumbnail', 'page-attributes')); 
+	'supports' => array('title', 'editor', 'thumbnail')); 
 	
 	register_post_type('cpo_testimonial', $fields);
 }

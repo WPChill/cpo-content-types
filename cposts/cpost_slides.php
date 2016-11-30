@@ -31,7 +31,7 @@ function ctct_cpost_slides(){
 	'hierarchical' => false,
 	'menu_icon' => 'dashicons-images-alt2',
 	'menu_position' => null,
-	'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'page-attributes')); 
+	'supports' => array('title', 'editor', 'excerpt', 'thumbnail')); 
 	
 	register_post_type('cpo_slide', $fields);
 }

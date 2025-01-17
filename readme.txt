@@ -2,8 +2,8 @@
 Contributors: cpothemes
 Tags: portfolio, features, slider, testimonials, clients, team, team members, services
 Requires at least: 4.0
-Tested up to: 6.0
-Stable tag: 1.1.0
+Tested up to: 6.7
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

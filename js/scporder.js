@@ -7,6 +7,7 @@
 			$.post( ajaxurl, {
 				action: 'update-menu-order',
 				order: $('#the-list').sortable('serialize'),
+				nonce: scporder.nonce
 			});
 		}
 	});  

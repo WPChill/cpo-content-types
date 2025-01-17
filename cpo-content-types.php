@@ -7,6 +7,7 @@
 * Author URI: http://www.cpothemes.com
 * Requires PHP: 5.6
 * Text Domain: ctct
+* License: GPLv3 or later
 */
 
 /**
@@ -15,6 +16,8 @@
  * @since    1.1.1
  */
 define( 'CTCT_CONTENT_TYPES_VERSION', '1.1.1' );
+define( 'CTCT_CONTENT_TYPES_PATH', plugin_dir_path( __FILE__ ) );
+define( 'CTCT_CONTENT_TYPES_URL', plugin_dir_url( __FILE__ ) );
 
 //Plugin setup
 if ( ! function_exists( 'ctct_setup' ) ) {
@@ -65,20 +68,19 @@ function ctct_admin_columns( $column ) {
 
 
 //Add all components
-$ctct_core_path = plugin_dir_path( __FILE__ );
 //General
-require_once $ctct_core_path . 'includes/settings.php';
-require_once $ctct_core_path . 'includes/metadata.php';
+require_once CTCT_CONTENT_TYPES_PATH . 'includes/settings.php';
+require_once CTCT_CONTENT_TYPES_PATH . 'includes/metadata.php';
 //Custom Post Types
-require_once $ctct_core_path . 'cposts/cpost-slides.php';
-require_once $ctct_core_path . 'cposts/cpost-features.php';
-require_once $ctct_core_path . 'cposts/cpost-portfolio.php';
-require_once $ctct_core_path . 'cposts/cpost-services.php';
-require_once $ctct_core_path . 'cposts/cpost-team.php';
-require_once $ctct_core_path . 'cposts/cpost-testimonials.php';
-require_once $ctct_core_path . 'cposts/cpost-clients.php';
+require_once CTCT_CONTENT_TYPES_PATH . 'cposts/cpost-slides.php';
+require_once CTCT_CONTENT_TYPES_PATH . 'cposts/cpost-features.php';
+require_once CTCT_CONTENT_TYPES_PATH . 'cposts/cpost-portfolio.php';
+require_once CTCT_CONTENT_TYPES_PATH . 'cposts/cpost-services.php';
+require_once CTCT_CONTENT_TYPES_PATH . 'cposts/cpost-team.php';
+require_once CTCT_CONTENT_TYPES_PATH . 'cposts/cpost-testimonials.php';
+require_once CTCT_CONTENT_TYPES_PATH . 'cposts/cpost-clients.php';
 // Custom Post Type Order
-require_once $ctct_core_path . 'includes/class-simple-custom-post-order.php';
+require_once CTCT_CONTENT_TYPES_PATH . 'includes/class-simple-custom-post-order.php';
 
 
 //Plugin activation hook

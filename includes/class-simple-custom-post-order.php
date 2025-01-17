@@ -58,14 +58,12 @@ class MT_Sort_Engine {
 	public function load_script_css() {
 
 		if ( $this->_check_load_script_css() ) {
-			$core_path = plugin_dir_url( __FILE__ );
-
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_script( 'jquery-ui-sortable' );
-			wp_enqueue_script( 'mt_orderjs', $core_path . 'js/scporder.js', array( 'jquery' ), CTCT_CONTENT_TYPES_VERSION, true );
+			wp_enqueue_script( 'mt_orderjs', CTCT_CONTENT_TYPES_URL . 'js/scporder.js', array( 'jquery' ), CTCT_CONTENT_TYPES_VERSION, true );
 			wp_localize_script( 'mt_orderjs', 'scporder', array( 'nonce' => wp_create_nonce( 'scp_order_nonce' ) ) );
 
-			wp_enqueue_style( 'mt_order', $core_path . 'css/scporder.css', array(), CTCT_CONTENT_TYPES_VERSION );
+			wp_enqueue_style( 'mt_order', CTCT_CONTENT_TYPES_URL . 'css/scporder.css', array(), CTCT_CONTENT_TYPES_VERSION );
 		}
 	}
 

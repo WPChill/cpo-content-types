@@ -8,16 +8,16 @@ function ctct_cpost_team() {
 		$show_ui = true;
 	}
 	$labels = array(
-		'name'               => __( 'Team Members', 'ctct' ),
-		'singular_name'      => __( 'Team Member', 'ctct' ),
-		'add_new'            => __( 'Add Team Member', 'ctct' ),
-		'add_new_item'       => __( 'Add New Team Member', 'ctct' ),
-		'edit_item'          => __( 'Edit Team Member', 'ctct' ),
-		'new_item'           => __( 'New Team Member', 'ctct' ),
-		'view_item'          => __( 'View Team Member', 'ctct' ),
-		'search_items'       => __( 'Search Team Members', 'ctct' ),
-		'not_found'          => __( 'No team members found.', 'ctct' ),
-		'not_found_in_trash' => __( 'No team members found in the trash.', 'ctct' ),
+		'name'               => __( 'Team Members', 'cpo-content-types' ),
+		'singular_name'      => __( 'Team Member', 'cpo-content-types' ),
+		'add_new'            => __( 'Add Team Member', 'cpo-content-types' ),
+		'add_new_item'       => __( 'Add New Team Member', 'cpo-content-types' ),
+		'edit_item'          => __( 'Edit Team Member', 'cpo-content-types' ),
+		'new_item'           => __( 'New Team Member', 'cpo-content-types' ),
+		'view_item'          => __( 'View Team Member', 'cpo-content-types' ),
+		'search_items'       => __( 'Search Team Members', 'cpo-content-types' ),
+		'not_found'          => __( 'No team members found.', 'cpo-content-types' ),
+		'not_found_in_trash' => __( 'No team members found in the trash.', 'cpo-content-types' ),
 		'parent_item_colon'  => '',
 	);
 
@@ -46,11 +46,11 @@ if ( ! function_exists( 'ctct_cpost_team_columns' ) ) {
 	function ctct_cpost_team_columns( $columns ) {
 		$columns = array(
 			'cb'             => '<input type="checkbox" />',
-			'ctct-image'     => __( 'Image', 'ctct' ),
-			'title'          => __( 'Title', 'ctct' ),
-			'ctct-team-cats' => __( 'Groups', 'ctct' ),
-			'date'           => __( 'Date', 'ctct' ),
-			'author'         => __( 'Author', 'ctct' ),
+			'ctct-image'     => __( 'Image', 'cpo-content-types' ),
+			'title'          => __( 'Title', 'cpo-content-types' ),
+			'ctct-team-cats' => __( 'Groups', 'cpo-content-types' ),
+			'date'           => __( 'Date', 'cpo-content-types' ),
+			'author'         => __( 'Author', 'cpo-content-types' ),
 		);
 		return $columns;
 	}
@@ -61,16 +61,16 @@ add_action( 'init', 'ctct_tax_teamcategory' );
 if ( ! function_exists( 'ctct_tax_teamcategory' ) ) {
 	function ctct_tax_teamcategory() {
 		$labels = array(
-			'name'               => __( 'Member Groups', 'ctct' ),
-			'singular_name'      => __( 'Member Group', 'ctct' ),
-			'add_new'            => __( 'New Member Group', 'ctct' ),
-			'add_new_item'       => __( 'Add Member Group', 'ctct' ),
-			'edit_item'          => __( 'Edit Member Group', 'ctct' ),
-			'new_item'           => __( 'New Member Group', 'ctct' ),
-			'view_item'          => __( 'View Member Group', 'ctct' ),
-			'search_items'       => __( 'Search Member Groups', 'ctct' ),
-			'not_found'          => __( 'No member groups were found.', 'ctct' ),
-			'not_found_in_trash' => __( 'No member groups were found in the trash.', 'ctct' ),
+			'name'               => __( 'Member Groups', 'cpo-content-types' ),
+			'singular_name'      => __( 'Member Group', 'cpo-content-types' ),
+			'add_new'            => __( 'New Member Group', 'cpo-content-types' ),
+			'add_new_item'       => __( 'Add Member Group', 'cpo-content-types' ),
+			'edit_item'          => __( 'Edit Member Group', 'cpo-content-types' ),
+			'new_item'           => __( 'New Member Group', 'cpo-content-types' ),
+			'view_item'          => __( 'View Member Group', 'cpo-content-types' ),
+			'search_items'       => __( 'Search Member Groups', 'cpo-content-types' ),
+			'not_found'          => __( 'No member groups were found.', 'cpo-content-types' ),
+			'not_found_in_trash' => __( 'No member groups were found in the trash.', 'cpo-content-types' ),
 			'parent_item_colon'  => '',
 		);
 

@@ -10,16 +10,16 @@ function ctct_cpost_features() {
 
 	//Set up labels
 	$labels = array(
-		'name'               => __( 'Features', 'ctct' ),
-		'singular_name'      => __( 'Feature', 'ctct' ),
-		'add_new'            => __( 'Add Feature', 'ctct' ),
-		'add_new_item'       => __( 'Add New Feature', 'ctct' ),
-		'edit_item'          => __( 'Edit Feature', 'ctct' ),
-		'new_item'           => __( 'New Feature', 'ctct' ),
-		'view_item'          => __( 'View Features', 'ctct' ),
-		'search_items'       => __( 'Search Features', 'ctct' ),
-		'not_found'          => __( 'No features found.', 'ctct' ),
-		'not_found_in_trash' => __( 'No features found in the trash.', 'ctct' ),
+		'name'               => __( 'Features', 'cpo-content-types' ),
+		'singular_name'      => __( 'Feature', 'cpo-content-types' ),
+		'add_new'            => __( 'Add Feature', 'cpo-content-types' ),
+		'add_new_item'       => __( 'Add New Feature', 'cpo-content-types' ),
+		'edit_item'          => __( 'Edit Feature', 'cpo-content-types' ),
+		'new_item'           => __( 'New Feature', 'cpo-content-types' ),
+		'view_item'          => __( 'View Features', 'cpo-content-types' ),
+		'search_items'       => __( 'Search Features', 'cpo-content-types' ),
+		'not_found'          => __( 'No features found.', 'cpo-content-types' ),
+		'not_found_in_trash' => __( 'No features found in the trash.', 'cpo-content-types' ),
 		'parent_item_colon'  => '',
 	);
 
@@ -47,11 +47,11 @@ if ( ! function_exists( 'ctct_cpost_features_columns' ) ) {
 	function ctct_cpost_features_columns( $columns ) {
 		$columns = array(
 			'cb'         => '<input type="checkbox" />',
-			'ctct-image' => __( 'Image', 'ctct' ),
-			'title'      => __( 'Title', 'ctct' ),
-			'date'       => __( 'Date', 'ctct' ),
-			'comments'   => '<span class="vers"><span title="' . __( 'Comments', 'ctct' ) . '" class="comment-grey-bubble"></span></span>',
-			'author'     => __( 'Author', 'ctct' ),
+			'ctct-image' => __( 'Image', 'cpo-content-types' ),
+			'title'      => __( 'Title', 'cpo-content-types' ),
+			'date'       => __( 'Date', 'cpo-content-types' ),
+			'comments'   => '<span class="vers"><span title="' . __( 'Comments', 'cpo-content-types' ) . '" class="comment-grey-bubble"></span></span>',
+			'author'     => __( 'Author', 'cpo-content-types' ),
 		);
 		return $columns;
 	}

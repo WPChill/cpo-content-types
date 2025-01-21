@@ -1,0 +1,27 @@
+{
+  "name": "cpo-content-types",
+  "version": "1.1.1",
+  "description": "Add support for special content types in your website, such as a portfolio, features, and slides.",
+  "scripts": {
+    "plugin-zip": "npm run clean && npm run copy && npm run bundle && npm run clean",
+    "clean": "rimraf build",
+    "copy": "node scripts/copy.js",
+    "bundle": "node scripts/bundle.js",
+    "lint:js": "wp-scripts lint-js apps/**/*.js",
+    "lint:js-fix": "wp-scripts lint-js apps/**/*.js* --fix"
+  },
+  "author": "CPOThemes",
+  "license": "GPLv2-or-later",
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/eslint-parser": "^7.25.1",
+    "archiver": "^7.0.1",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "fs-extra": "^11.2.0",
+    "glob": "^11.0.0",
+    "rimraf": "^6.0.1"
+  }
+}

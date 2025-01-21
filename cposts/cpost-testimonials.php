@@ -10,16 +10,16 @@ function ctct_cpost_testimonials() {
 
 	//Set up labels
 	$labels = array(
-		'name'               => __( 'Testimonials', 'ctct' ),
-		'singular_name'      => __( 'Testimonial', 'ctct' ),
-		'add_new'            => __( 'Add Testimonial', 'ctct' ),
-		'add_new_item'       => __( 'Add New Testimonial', 'ctct' ),
-		'edit_item'          => __( 'Edit Testimonial', 'ctct' ),
-		'new_item'           => __( 'New Testimonial', 'ctct' ),
-		'view_item'          => __( 'View Testimonial', 'ctct' ),
-		'search_items'       => __( 'Search Testimonials', 'ctct' ),
-		'not_found'          => __( 'No testimonials found.', 'ctct' ),
-		'not_found_in_trash' => __( 'No testimonials found in the trash.', 'ctct' ),
+		'name'               => __( 'Testimonials', 'cpo-content-types' ),
+		'singular_name'      => __( 'Testimonial', 'cpo-content-types' ),
+		'add_new'            => __( 'Add Testimonial', 'cpo-content-types' ),
+		'add_new_item'       => __( 'Add New Testimonial', 'cpo-content-types' ),
+		'edit_item'          => __( 'Edit Testimonial', 'cpo-content-types' ),
+		'new_item'           => __( 'New Testimonial', 'cpo-content-types' ),
+		'view_item'          => __( 'View Testimonial', 'cpo-content-types' ),
+		'search_items'       => __( 'Search Testimonials', 'cpo-content-types' ),
+		'not_found'          => __( 'No testimonials found.', 'cpo-content-types' ),
+		'not_found_in_trash' => __( 'No testimonials found in the trash.', 'cpo-content-types' ),
 		'parent_item_colon'  => '',
 	);
 
@@ -46,10 +46,10 @@ if ( ! function_exists( 'ctct_cpost_testimonials_columns' ) ) {
 	function ctct_cpost_testimonials_columns( $columns ) {
 		$columns = array(
 			'cb'         => '<input type="checkbox" />',
-			'ctct-image' => __( 'Image', 'ctct' ),
-			'title'      => __( 'Title', 'ctct' ),
-			'date'       => __( 'Date', 'ctct' ),
-			'author'     => __( 'Author', 'ctct' ),
+			'ctct-image' => __( 'Image', 'cpo-content-types' ),
+			'title'      => __( 'Title', 'cpo-content-types' ),
+			'date'       => __( 'Date', 'cpo-content-types' ),
+			'author'     => __( 'Author', 'cpo-content-types' ),
 		);
 		return $columns;
 	}

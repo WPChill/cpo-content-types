@@ -6,8 +6,8 @@
 * Version: 1.1.1
 * Author URI: http://www.cpothemes.com
 * Requires PHP: 5.6
-* Text Domain: ctct
-* License: GPLv3 or later
+* Text Domain: cpo-content-types
+* License: GPLv2 or later
 */
 
 /**
@@ -24,7 +24,7 @@ if ( ! function_exists( 'ctct_setup' ) ) {
 	add_action( 'plugins_loaded', 'ctct_setup' );
 	function ctct_setup() {
 		//Load text domain
-		$textdomain = 'ctct';
+		$textdomain = 'cpo-content-types';
 		$locale     = apply_filters( 'plugin_locale', get_locale(), $textdomain ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		if ( ! load_textdomain( $textdomain, trailingslashit( WP_LANG_DIR ) . $textdomain . '/' . $textdomain . '-' . $locale . '.mo' ) ) {
 			load_plugin_textdomain( $textdomain, false, dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/' );
@@ -36,7 +36,7 @@ if ( ! function_exists( 'ctct_setup' ) ) {
 //Add admin stylesheets
 add_action( 'admin_print_styles', 'ctct_add_styles_admin' );
 function ctct_add_styles_admin() {
-	$stylesheets_path = plugins_url( 'css/', __FILE__ );
+	$stylesheets_path = plugins_url( 'assets/css/', __FILE__ );
 	wp_enqueue_style( 'ctct-admin', $stylesheets_path . 'admin.css', null, CTCT_CONTENT_TYPES_VERSION );
 }
 

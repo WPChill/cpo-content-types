@@ -32,22 +32,12 @@
     </rule>
     <rule ref="WordPress.WP.I18n">
         <properties>
-            <property name="text_domain" type="array" value="ctct"/>
+            <property name="text_domain" type="array" value="cpo-content-types"/>
         </properties>
     </rule>
     <rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
         <properties>
             <property name="blank_line_check" value="true"/>
-        </properties>
-    </rule>
-    <rule ref="WordPress.WP.Capabilities">
-        <properties>
-            <property name="custom_capabilities" type="array">
-                <element value="modula_select_images"/>
-                <element value="modula_see_gallery"/>
-                <element value="modula_annotate_images"/>
-                <element value="modula_comment_on_annotations"/>
-            </property>
         </properties>
     </rule>
 </ruleset>

@@ -5,16 +5,16 @@ add_action( 'init', 'ctct_cpost_products' );
 if ( ! function_exists( 'ctct_cpost_products' ) ) {
 	function ctct_cpost_products() {
 		$labels = array(
-			'name'               => __( 'Products', 'ctct' ),
-			'singular_name'      => __( 'Product', 'ctct' ),
-			'add_new'            => __( 'Add Product', 'ctct' ),
-			'add_new_item'       => __( 'Add New Product', 'ctct' ),
-			'edit_item'          => __( 'Edit Product', 'ctct' ),
-			'new_item'           => __( 'New Product', 'ctct' ),
-			'view_item'          => __( 'View Products', 'ctct' ),
-			'search_items'       => __( 'Search Products', 'ctct' ),
-			'not_found'          => __( 'No products found.', 'ctct' ),
-			'not_found_in_trash' => __( 'No products found in the trash.', 'ctct' ),
+			'name'               => __( 'Products', 'cpo-content-types' ),
+			'singular_name'      => __( 'Product', 'cpo-content-types' ),
+			'add_new'            => __( 'Add Product', 'cpo-content-types' ),
+			'add_new_item'       => __( 'Add New Product', 'cpo-content-types' ),
+			'edit_item'          => __( 'Edit Product', 'cpo-content-types' ),
+			'new_item'           => __( 'New Product', 'cpo-content-types' ),
+			'view_item'          => __( 'View Products', 'cpo-content-types' ),
+			'search_items'       => __( 'Search Products', 'cpo-content-types' ),
+			'not_found'          => __( 'No products found.', 'cpo-content-types' ),
+			'not_found_in_trash' => __( 'No products found in the trash.', 'cpo-content-types' ),
 			'parent_item_colon'  => '',
 		);
 
@@ -47,13 +47,13 @@ if ( ! function_exists( 'ctct_cpost_products_columns' ) ) {
 	function ctct_cpost_products_columns( $columns ) {
 		$columns = array(
 			'cb'               => '<input type="checkbox" />',
-			'cpo-image'        => __( 'Image', 'ctct' ),
-			'title'            => __( 'Title', 'ctct' ),
-			'cpo-product-cats' => __( 'Categories', 'ctct' ),
-			'cpo-product-tags' => __( 'Tags', 'ctct' ),
-			'date'             => __( 'Date', 'ctct' ),
-			'comments'         => '<span class="vers"><span title="' . __( 'Comments', 'ctct' ) . '" class="comment-grey-bubble"></span></span>',
-			'author'           => __( 'Author', 'ctct' ),
+			'cpo-image'        => __( 'Image', 'cpo-content-types' ),
+			'title'            => __( 'Title', 'cpo-content-types' ),
+			'cpo-product-cats' => __( 'Categories', 'cpo-content-types' ),
+			'cpo-product-tags' => __( 'Tags', 'cpo-content-types' ),
+			'date'             => __( 'Date', 'cpo-content-types' ),
+			'comments'         => '<span class="vers"><span title="' . __( 'Comments', 'cpo-content-types' ) . '" class="comment-grey-bubble"></span></span>',
+			'author'           => __( 'Author', 'cpo-content-types' ),
 		);
 		return $columns;
 	}
@@ -64,16 +64,16 @@ add_action( 'init', 'ctct_tax_productctategory' );
 if ( ! function_exists( 'ctct_tax_productctategory' ) ) {
 	function ctct_tax_productctategory() {
 		$labels = array(
-			'name'               => __( 'Product Categories', 'ctct' ),
-			'singular_name'      => __( 'Product Category', 'ctct' ),
-			'add_new'            => __( 'New Product Category', 'ctct' ),
-			'add_new_item'       => __( 'Add Product Category', 'ctct' ),
-			'edit_item'          => __( 'Edit Product Category', 'ctct' ),
-			'new_item'           => __( 'New Product Category', 'ctct' ),
-			'view_item'          => __( 'View Product Category', 'ctct' ),
-			'search_items'       => __( 'Search Product Categories', 'ctct' ),
-			'not_found'          => __( 'No products categories were found.', 'ctct' ),
-			'not_found_in_trash' => __( 'No products categories were found in the trash.', 'ctct' ),
+			'name'               => __( 'Product Categories', 'cpo-content-types' ),
+			'singular_name'      => __( 'Product Category', 'cpo-content-types' ),
+			'add_new'            => __( 'New Product Category', 'cpo-content-types' ),
+			'add_new_item'       => __( 'Add Product Category', 'cpo-content-types' ),
+			'edit_item'          => __( 'Edit Product Category', 'cpo-content-types' ),
+			'new_item'           => __( 'New Product Category', 'cpo-content-types' ),
+			'view_item'          => __( 'View Product Category', 'cpo-content-types' ),
+			'search_items'       => __( 'Search Product Categories', 'cpo-content-types' ),
+			'not_found'          => __( 'No products categories were found.', 'cpo-content-types' ),
+			'not_found_in_trash' => __( 'No products categories were found in the trash.', 'cpo-content-types' ),
 			'parent_item_colon'  => '',
 		);
 
@@ -101,16 +101,16 @@ if ( ! function_exists( 'ctct_tax_productstag' ) ) {
 	function ctct_tax_productstag() {
 		//Set up labels
 		$labels = array(
-			'name'               => __( 'Product Tags', 'ctct' ),
-			'singular_name'      => __( 'Product Tag', 'ctct' ),
-			'add_new'            => __( 'New Product Tag', 'ctct' ),
-			'add_new_item'       => __( 'Add Product Tag', 'ctct' ),
-			'edit_item'          => __( 'Edit Product Tag', 'ctct' ),
-			'new_item'           => __( 'New Product Tag', 'ctct' ),
-			'view_item'          => __( 'View Product Tag', 'ctct' ),
-			'search_items'       => __( 'Search Product Tags', 'ctct' ),
-			'not_found'          => __( 'No product tags were found.', 'ctct' ),
-			'not_found_in_trash' => __( 'No product tags were found in the trash.', 'ctct' ),
+			'name'               => __( 'Product Tags', 'cpo-content-types' ),
+			'singular_name'      => __( 'Product Tag', 'cpo-content-types' ),
+			'add_new'            => __( 'New Product Tag', 'cpo-content-types' ),
+			'add_new_item'       => __( 'Add Product Tag', 'cpo-content-types' ),
+			'edit_item'          => __( 'Edit Product Tag', 'cpo-content-types' ),
+			'new_item'           => __( 'New Product Tag', 'cpo-content-types' ),
+			'view_item'          => __( 'View Product Tag', 'cpo-content-types' ),
+			'search_items'       => __( 'Search Product Tags', 'cpo-content-types' ),
+			'not_found'          => __( 'No product tags were found.', 'cpo-content-types' ),
+			'not_found_in_trash' => __( 'No product tags were found in the trash.', 'cpo-content-types' ),
 			'parent_item_colon'  => '',
 		);
 

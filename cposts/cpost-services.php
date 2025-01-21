@@ -10,16 +10,16 @@ function ctct_cpost_services() {
 
 	//Set up labels
 	$labels = array(
-		'name'               => __( 'Services', 'ctct' ),
-		'singular_name'      => __( 'Services', 'ctct' ),
-		'add_new'            => __( 'Add Service', 'ctct' ),
-		'add_new_item'       => __( 'Add New Service', 'ctct' ),
-		'edit_item'          => __( 'Edit Service', 'ctct' ),
-		'new_item'           => __( 'New Service', 'ctct' ),
-		'view_item'          => __( 'View Service', 'ctct' ),
-		'search_items'       => __( 'Search Services', 'ctct' ),
-		'not_found'          => __( 'No services found.', 'ctct' ),
-		'not_found_in_trash' => __( 'No services found in the trash.', 'ctct' ),
+		'name'               => __( 'Services', 'cpo-content-types' ),
+		'singular_name'      => __( 'Services', 'cpo-content-types' ),
+		'add_new'            => __( 'Add Service', 'cpo-content-types' ),
+		'add_new_item'       => __( 'Add New Service', 'cpo-content-types' ),
+		'edit_item'          => __( 'Edit Service', 'cpo-content-types' ),
+		'new_item'           => __( 'New Service', 'cpo-content-types' ),
+		'view_item'          => __( 'View Service', 'cpo-content-types' ),
+		'search_items'       => __( 'Search Services', 'cpo-content-types' ),
+		'not_found'          => __( 'No services found.', 'cpo-content-types' ),
+		'not_found_in_trash' => __( 'No services found in the trash.', 'cpo-content-types' ),
 		'parent_item_colon'  => '',
 	);
 
@@ -52,13 +52,13 @@ if ( ! function_exists( 'ctct_cpost_services_columns' ) ) {
 	function ctct_cpost_services_columns( $columns ) {
 		$columns = array(
 			'cb'               => '<input type="checkbox" />',
-			'cpo-image'        => __( 'Image', 'ctct' ),
-			'title'            => __( 'Title', 'ctct' ),
-			'cpo-service-cats' => __( 'Categories', 'ctct' ),
-			'cpo-service-tags' => __( 'Tags', 'ctct' ),
-			'date'             => __( 'Date', 'ctct' ),
-			'comments'         => '<span class="vers"><span title="' . __( 'Comments', 'ctct' ) . '" class="comment-grey-bubble"></span></span>',
-			'author'           => __( 'Author', 'ctct' ),
+			'cpo-image'        => __( 'Image', 'cpo-content-types' ),
+			'title'            => __( 'Title', 'cpo-content-types' ),
+			'cpo-service-cats' => __( 'Categories', 'cpo-content-types' ),
+			'cpo-service-tags' => __( 'Tags', 'cpo-content-types' ),
+			'date'             => __( 'Date', 'cpo-content-types' ),
+			'comments'         => '<span class="vers"><span title="' . __( 'Comments', 'cpo-content-types' ) . '" class="comment-grey-bubble"></span></span>',
+			'author'           => __( 'Author', 'cpo-content-types' ),
 		);
 		return $columns;
 	}
@@ -69,16 +69,16 @@ add_action( 'init', 'ctct_tax_servicescategory' );
 if ( ! function_exists( 'ctct_tax_servicescategory' ) ) {
 	function ctct_tax_servicescategory() {
 		$labels = array(
-			'name'               => __( 'Service Categories', 'ctct' ),
-			'singular_name'      => __( 'Service Category', 'ctct' ),
-			'add_new'            => __( 'New Service Category', 'ctct' ),
-			'add_new_item'       => __( 'Add Service Category', 'ctct' ),
-			'edit_item'          => __( 'Edit Service Category', 'ctct' ),
-			'new_item'           => __( 'New Service Category', 'ctct' ),
-			'view_item'          => __( 'View Service Category', 'ctct' ),
-			'search_items'       => __( 'Search Service Categories', 'ctct' ),
-			'not_found'          => __( 'No services categories were found.', 'ctct' ),
-			'not_found_in_trash' => __( 'No services categories were found in the trash.', 'ctct' ),
+			'name'               => __( 'Service Categories', 'cpo-content-types' ),
+			'singular_name'      => __( 'Service Category', 'cpo-content-types' ),
+			'add_new'            => __( 'New Service Category', 'cpo-content-types' ),
+			'add_new_item'       => __( 'Add Service Category', 'cpo-content-types' ),
+			'edit_item'          => __( 'Edit Service Category', 'cpo-content-types' ),
+			'new_item'           => __( 'New Service Category', 'cpo-content-types' ),
+			'view_item'          => __( 'View Service Category', 'cpo-content-types' ),
+			'search_items'       => __( 'Search Service Categories', 'cpo-content-types' ),
+			'not_found'          => __( 'No services categories were found.', 'cpo-content-types' ),
+			'not_found_in_trash' => __( 'No services categories were found in the trash.', 'cpo-content-types' ),
 			'parent_item_colon'  => '',
 		);
 
@@ -106,16 +106,16 @@ if ( ! function_exists( 'ctct_tax_servicestag' ) ) {
 	function ctct_tax_servicestag() {
 		//Set up labels
 		$labels = array(
-			'name'               => __( 'Service Tags', 'ctct' ),
-			'singular_name'      => __( 'Service Tag', 'ctct' ),
-			'add_new'            => __( 'New Service Tag', 'ctct' ),
-			'add_new_item'       => __( 'Add Service Tag', 'ctct' ),
-			'edit_item'          => __( 'Edit Service Tag', 'ctct' ),
-			'new_item'           => __( 'New Service Tag', 'ctct' ),
-			'view_item'          => __( 'View Service Tag', 'ctct' ),
-			'search_items'       => __( 'Search Service Tags', 'ctct' ),
-			'not_found'          => __( 'No services tags were found.', 'ctct' ),
-			'not_found_in_trash' => __( 'No services tags were found in the trash.', 'ctct' ),
+			'name'               => __( 'Service Tags', 'cpo-content-types' ),
+			'singular_name'      => __( 'Service Tag', 'cpo-content-types' ),
+			'add_new'            => __( 'New Service Tag', 'cpo-content-types' ),
+			'add_new_item'       => __( 'Add Service Tag', 'cpo-content-types' ),
+			'edit_item'          => __( 'Edit Service Tag', 'cpo-content-types' ),
+			'new_item'           => __( 'New Service Tag', 'cpo-content-types' ),
+			'view_item'          => __( 'View Service Tag', 'cpo-content-types' ),
+			'search_items'       => __( 'Search Service Tags', 'cpo-content-types' ),
+			'not_found'          => __( 'No services tags were found.', 'cpo-content-types' ),
+			'not_found_in_trash' => __( 'No services tags were found in the trash.', 'cpo-content-types' ),
 			'parent_item_colon'  => '',
 		);
 

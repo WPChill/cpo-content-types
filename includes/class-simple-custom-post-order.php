@@ -60,10 +60,10 @@ class MT_Sort_Engine {
 		if ( $this->_check_load_script_css() ) {
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_script( 'jquery-ui-sortable' );
-			wp_enqueue_script( 'mt_orderjs', CTCT_CONTENT_TYPES_URL . 'js/scporder.js', array( 'jquery' ), CTCT_CONTENT_TYPES_VERSION, true );
+			wp_enqueue_script( 'mt_orderjs', CTCT_CONTENT_TYPES_URL . 'assets/js/scporder.js', array( 'jquery' ), CTCT_CONTENT_TYPES_VERSION, true );
 			wp_localize_script( 'mt_orderjs', 'scporder', array( 'nonce' => wp_create_nonce( 'scp_order_nonce' ) ) );
 
-			wp_enqueue_style( 'mt_order', CTCT_CONTENT_TYPES_URL . 'css/scporder.css', array(), CTCT_CONTENT_TYPES_VERSION );
+			wp_enqueue_style( 'mt_order', CTCT_CONTENT_TYPES_URL . 'assets/css/scporder.css', array(), CTCT_CONTENT_TYPES_VERSION );
 		}
 	}
 
@@ -160,7 +160,7 @@ class MT_Sort_Engine {
 		check_admin_referer( 'nonce_mt_order' );
 
 		$input_options            = array();
-		$input_options['objects'] = isset( $_POST['objects'] ) ? $_POST['objects'] : '';
+		$input_options['objects'] = isset( $_POST['objects'] ) && is_array( $_POST['objects'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['objects'] ) ) : array();
 
 		update_option( 'mt_order_options', $input_options );
 
@@ -227,7 +227,7 @@ class MT_Sort_Engine {
 			return $where;
 		}
 
-		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects ) ) {
+		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects, true ) ) {
 			$current_menu_order = $post->menu_order;
 			$where              = "WHERE p.menu_order > '" . $current_menu_order . "' AND p.post_type = '" . $post->post_type . "' AND p.post_status = 'publish'";
 		}
@@ -243,7 +243,7 @@ class MT_Sort_Engine {
 			return $orderby;
 		}
 
-		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects ) ) {
+		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects, true ) ) {
 			$orderby = 'ORDER BY p.menu_order ASC LIMIT 1';
 		}
 
@@ -258,7 +258,7 @@ class MT_Sort_Engine {
 			return $where;
 		}
 
-		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects ) ) {
+		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects, true ) ) {
 			$current_menu_order = $post->menu_order;
 			$where              = "WHERE p.menu_order < '" . $current_menu_order . "' AND p.post_type = '" . $post->post_type . "' AND p.post_status = 'publish'";
 		}
@@ -274,7 +274,7 @@ class MT_Sort_Engine {
 			return $orderby;
 		}
 
-		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects ) ) {
+		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects, true ) ) {
 			$orderby = 'ORDER BY p.menu_order DESC LIMIT 1';
 		}
 
@@ -288,7 +288,7 @@ class MT_Sort_Engine {
 		}
 		if ( is_admin() ) {
 			if ( isset( $wp_query->query['post_type'] ) && ! isset( $_GET['orderby'] ) ) {
-				if ( in_array( $wp_query->query['post_type'], $objects ) ) {
+				if ( in_array( $wp_query->query['post_type'], $objects, true ) ) {
 					$wp_query->set( 'orderby', 'menu_order' );
 					$wp_query->set( 'order', 'ASC' );
 				}
@@ -298,11 +298,11 @@ class MT_Sort_Engine {
 
 			if ( isset( $wp_query->query['post_type'] ) ) {
 				if ( ! is_array( $wp_query->query['post_type'] ) ) {
-					if ( in_array( $wp_query->query['post_type'], $objects ) ) {
+					if ( in_array( $wp_query->query['post_type'], $objects, true ) ) {
 						$active = true;
 					}
 				}
-			} elseif ( in_array( 'post', $objects ) ) {
+			} elseif ( in_array( 'post', $objects, true ) ) {
 					$active = true;
 			}
 
@@ -311,10 +311,10 @@ class MT_Sort_Engine {
 			}
 
 			if ( isset( $wp_query->query['suppress_filters'] ) ) {
-				if ( $wp_query->get( 'orderby' ) == 'date' ) {
+				if ( 'date' === $wp_query->get( 'orderby' ) ) {
 					$wp_query->set( 'orderby', 'menu_order' );
 				}
-				if ( $wp_query->get( 'order' ) == 'DESC' ) {
+				if ( 'DESC' === $wp_query->get( 'order' ) ) {
 					$wp_query->set( 'order', 'ASC' );
 				}
 			} else {

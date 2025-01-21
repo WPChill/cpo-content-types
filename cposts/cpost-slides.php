@@ -10,16 +10,16 @@ function ctct_cpost_slides() {
 
 	//Set up labels
 	$labels = array(
-		'name'               => __( 'Slides', 'ctct' ),
-		'singular_name'      => __( 'Slide', 'ctct' ),
-		'add_new'            => __( 'New Slide', 'ctct' ),
-		'add_new_item'       => __( 'Add New Slide', 'ctct' ),
-		'edit_item'          => __( 'Edit Slide', 'ctct' ),
-		'new_item'           => __( 'New Slide', 'ctct' ),
-		'view_item'          => __( 'View Slide', 'ctct' ),
-		'search_items'       => __( 'Search Slides', 'ctct' ),
-		'not_found'          => __( 'No slides were found.', 'ctct' ),
-		'not_found_in_trash' => __( 'No slides were found in the trash.', 'ctct' ),
+		'name'               => __( 'Slides', 'cpo-content-types' ),
+		'singular_name'      => __( 'Slide', 'cpo-content-types' ),
+		'add_new'            => __( 'New Slide', 'cpo-content-types' ),
+		'add_new_item'       => __( 'Add New Slide', 'cpo-content-types' ),
+		'edit_item'          => __( 'Edit Slide', 'cpo-content-types' ),
+		'new_item'           => __( 'New Slide', 'cpo-content-types' ),
+		'view_item'          => __( 'View Slide', 'cpo-content-types' ),
+		'search_items'       => __( 'Search Slides', 'cpo-content-types' ),
+		'not_found'          => __( 'No slides were found.', 'cpo-content-types' ),
+		'not_found_in_trash' => __( 'No slides were found in the trash.', 'cpo-content-types' ),
 		'parent_item_colon'  => '',
 	);
 
@@ -46,11 +46,11 @@ if ( ! function_exists( 'ctct_cpost_slides_columns' ) ) {
 	function ctct_cpost_slides_columns( $columns ) {
 		$columns = array(
 			'cb'         => '<input type="checkbox" />',
-			'ctct-image' => __( 'Image', 'ctct' ),
-			'title'      => __( 'Title', 'ctct' ),
-			'date'       => __( 'Date', 'ctct' ),
-			'comments'   => '<span class="vers"><span title="' . __( 'Comments', 'ctct' ) . '" class="comment-grey-bubble"></span></span>',
-			'author'     => __( 'Author', 'ctct' ),
+			'ctct-image' => __( 'Image', 'cpo-content-types' ),
+			'title'      => __( 'Title', 'cpo-content-types' ),
+			'date'       => __( 'Date', 'cpo-content-types' ),
+			'comments'   => '<span class="vers"><span title="' . __( 'Comments', 'cpo-content-types' ) . '" class="comment-grey-bubble"></span></span>',
+			'author'     => __( 'Author', 'cpo-content-types' ),
 		);
 		return $columns;
 	}

@@ -1,3 +1,6 @@
+= 1.1.1 =
+* Security update.
+
 = 1.1.0 =
 * Rewrite rules are now flushed on plugin activation and settings save.
 

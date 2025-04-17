@@ -6,7 +6,7 @@ const buildDir = path.join( __dirname, '../build' );
 
 // Define directories and files to copy
 const dirsToCopy = [ 'includes', 'assets', 'cposts', 'languages' ];
-const filesToCopy = [ 'readme.txt', 'cpo-content-types.php', 'LICENSE.txt' ];
+const filesToCopy = [ 'readme.txt', 'cpo-content-types.php', 'license.txt', 'changelog.txt' ];
 
 // Ensure build directory exists
 fs.ensureDirSync( buildDir );

@@ -32,6 +32,7 @@ archive.file( 'build/cpo-content-types.php', {
 	name: `${ pluginFolder }/cpo-content-types.php`,
 } );
 archive.file( 'build/readme.txt', { name: `${ pluginFolder }/readme.txt` } );
-archive.file( 'build/LICENSE.txt', { name: `${ pluginFolder }/LICENSE.txt` } );
+archive.file( 'build/license.txt', { name: `${ pluginFolder }/license.txt` } );
+archive.file( 'build/changelog.txt', { name: `${ pluginFolder }/changelog.txt` } );
 
 archive.finalize();

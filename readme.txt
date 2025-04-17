@@ -1,9 +1,9 @@
 === CPO Content Types ===
 Contributors: cpothemes
-Tags: portfolio, features, slider, testimonials, clients, team, team members, services
+Tags: portfolio, features, slider, testimonials, clients
 Requires at least: 4.0
-Tested up to: 6.0
-Stable tag: 1.1.0
+Tested up to: 6.8
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,8 @@ Add support for special content types in your website, such as a portfolio, feat
 1. Manage post types from the admin panel.
 
 == Changelog ==
+= 1.1.1 =
+* Security update.
 
 = 1.1.0 =
 * Rewrite rules are now flushed on plugin activation and settings save.

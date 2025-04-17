@@ -1,10 +1,8 @@
 <?php
 
-$mt_order = new MT_Sort_Engine();
-
 class MT_Sort_Engine {
 
-	function __construct() {
+	public function __construct() {
 
 		add_action( 'admin_init', array( $this, 'refresh' ) );
 		add_action( 'admin_init', array( $this, 'update_options' ) );
@@ -18,29 +16,38 @@ class MT_Sort_Engine {
 		add_filter( 'get_previous_post_sort', array( $this, 'mt_order_previous_post_sort' ) );
 		add_filter( 'get_next_post_where', array( $this, 'mt_order_next_post_where' ) );
 		add_filter( 'get_next_post_sort', array( $this, 'mt_order_next_post_sort' ) );
-
 	}
 
 
-	function _check_load_script_css() {
+	public function _check_load_script_css() {
 		$active = false;
 
 		$objects = $this->get_mt_order_options_objects();
-
 
 		if ( empty( $objects ) ) {
 			return false;
 		}
 
-		if ( isset( $_GET['orderby'] ) || strstr( $_SERVER['REQUEST_URI'], 'action=edit' ) || strstr( $_SERVER['REQUEST_URI'], 'wp-admin/post-new.php' ) ) {
+		if ( isset( $_GET['orderby'] ) ||
+			( isset( $_SERVER['REQUEST_URI'] ) &&
+				(
+					strstr( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), 'action=edit' ) ||
+					strstr( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), 'wp-admin/post-new.php' )
+				)
+			)
+		) {
 			return false;
 		}
 
 		if ( ! empty( $objects ) ) {
-			if ( isset( $_GET['post_type'] ) && ! isset( $_GET['taxonomy'] ) && in_array( $_GET['post_type'], $objects ) ) { // if page or custom post types
+			if ( isset( $_GET['post_type'] ) && ! isset( $_GET['taxonomy'] ) && in_array( $_GET['post_type'], $objects, true ) ) { // if page or custom post types
 				$active = true;
 			}
-			if ( ! isset( $_GET['post_type'] ) && strstr( $_SERVER['REQUEST_URI'], 'wp-admin/edit.php' ) && in_array( 'post', $objects ) ) { // if post
+			if ( ! isset( $_GET['post_type'] ) &&
+				isset( $_SERVER['REQUEST_URI'] ) &&
+				strstr( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), 'wp-admin/edit.php' ) &&
+				in_array( 'post', $objects, true )
+			) {
 				$active = true;
 			}
 		}
@@ -48,52 +55,71 @@ class MT_Sort_Engine {
 		return $active;
 	}
 
-	function load_script_css() {
+	public function load_script_css() {
 
 		if ( $this->_check_load_script_css() ) {
-
-			$core_path = plugin_dir_url(__FILE__);
-
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_script( 'jquery-ui-sortable' );
-			wp_enqueue_script( 'mt_orderjs', $core_path . 'js/scporder.js', array( 'jquery' ), null, true );
-			wp_enqueue_style( 'mt_order', $core_path . 'css/scporder.css', array(), null );
+			wp_enqueue_script( 'mt_orderjs', CTCT_CONTENT_TYPES_URL . 'assets/js/scporder.js', array( 'jquery' ), CTCT_CONTENT_TYPES_VERSION, true );
+			wp_localize_script( 'mt_orderjs', 'scporder', array( 'nonce' => wp_create_nonce( 'scp_order_nonce' ) ) );
+
+			wp_enqueue_style( 'mt_order', CTCT_CONTENT_TYPES_URL . 'assets/css/scporder.css', array(), CTCT_CONTENT_TYPES_VERSION );
 		}
 	}
 
-	function refresh() {
+	public function refresh() {
 		global $wpdb;
 		$objects = $this->get_mt_order_options_objects();
 
 		if ( ! empty( $objects ) ) {
 			foreach ( $objects as $object ) {
-				$result = $wpdb->get_results( "
-					SELECT count(*) as cnt, max(menu_order) as max, min(menu_order) as min 
-					FROM $wpdb->posts 
-					WHERE post_type = '" . $object . "' AND post_status IN ('publish', 'pending', 'draft', 'private', 'future')
-				" );
-				if ( $result[0]->cnt == 0 || $result[0]->cnt == $result[0]->max ) {
+				$result = $wpdb->get_results(
+					$wpdb->prepare(
+						"
+						SELECT count(*) as cnt, max(menu_order) as max, min(menu_order) as min 
+						FROM $wpdb->posts 
+						WHERE post_type = %s 
+						AND post_status IN ('publish', 'pending', 'draft', 'private', 'future')
+						",
+						$object
+					)
+				);
+				if ( 0 === absint( $result[0]->cnt ) || absint( $result[0]->cnt ) === absint( $result[0]->max ) ) {
 					continue;
 				}
 
-				$results = $wpdb->get_results( "
-					SELECT ID 
-					FROM $wpdb->posts 
-					WHERE post_type = '" . $object . "' AND post_status IN ('publish', 'pending', 'draft', 'private', 'future') 
-					ORDER BY menu_order ASC
-				" );
+				$results = $wpdb->get_results(
+					$wpdb->prepare(
+						"
+						SELECT ID 
+						FROM $wpdb->posts 
+						WHERE post_type = %s 
+						AND post_status IN ('publish', 'pending', 'draft', 'private', 'future') 
+						ORDER BY menu_order ASC
+						",
+						$object
+					)
+				);
 				foreach ( $results as $key => $result ) {
 					$wpdb->update( $wpdb->posts, array( 'menu_order' => $key + 1 ), array( 'ID' => $result->ID ) );
 				}
 			}
 		}
-
 	}
 
-	function update_menu_order() {
+	public function update_menu_order() {
+
+		check_ajax_referer( 'scp_order_nonce', 'nonce' );
+
 		global $wpdb;
 
-		parse_str( $_POST['order'], $data );
+		$order = isset( $_POST['order'] ) ? sanitize_text_field( wp_unslash( $_POST['order'] ) ) : false;
+
+		if ( ! $order ) {
+			return false;
+		}
+
+		parse_str( $order, $data );
 
 		if ( ! is_array( $data ) ) {
 			return false;
@@ -124,7 +150,7 @@ class MT_Sort_Engine {
 	}
 
 
-	function update_options() {
+	public function update_options() {
 		global $wpdb;
 
 		if ( ! isset( $_POST['mt_order_submit'] ) ) {
@@ -134,39 +160,55 @@ class MT_Sort_Engine {
 		check_admin_referer( 'nonce_mt_order' );
 
 		$input_options            = array();
-		$input_options['objects'] = isset( $_POST['objects'] ) ? $_POST['objects'] : '';
-
+		$input_options['objects'] = isset( $_POST['objects'] ) && is_array( $_POST['objects'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['objects'] ) ) : array();
 
 		update_option( 'mt_order_options', $input_options );
 
 		$objects = $this->get_mt_order_options_objects();
 
-
 		if ( ! empty( $objects ) ) {
 			foreach ( $objects as $object ) {
-				$result = $wpdb->get_results( "
-					SELECT count(*) as cnt, max(menu_order) as max, min(menu_order) as min 
-					FROM $wpdb->posts 
-					WHERE post_type = '" . $object . "' AND post_status IN ('publish', 'pending', 'draft', 'private', 'future')
-				" );
-				if ( $result[0]->cnt == 0 || $result[0]->cnt == $result[0]->max ) {
+				$result = $wpdb->get_results(
+					$wpdb->prepare(
+						"
+						SELECT count(*) as cnt, max(menu_order) as max, min(menu_order) as min 
+						FROM $wpdb->posts 
+						WHERE post_type = %s 
+						AND post_status IN ('publish', 'pending', 'draft', 'private', 'future')
+						",
+						$object
+					)
+				);
+				if ( 0 === absint( $result[0]->cnt ) || absint( $result[0]->cnt ) === absint( $result[0]->max ) ) {
 					continue;
 				}
 
-				if ( $object == 'page' ) {
-					$results = $wpdb->get_results( "
-						SELECT ID 
-						FROM $wpdb->posts 
-						WHERE post_type = '" . $object . "' AND post_status IN ('publish', 'pending', 'draft', 'private', 'future') 
-						ORDER BY post_title ASC
-					" );
+				if ( 'page' === $object ) {
+					$results = $wpdb->get_results(
+						$wpdb->prepare(
+							"
+							SELECT ID 
+							FROM $wpdb->posts 
+							WHERE post_type = %s 
+							AND post_status IN ('publish', 'pending', 'draft', 'private', 'future') 
+							ORDER BY post_title ASC
+							",
+							$object
+						)
+					);
 				} else {
-					$results = $wpdb->get_results( "
-						SELECT ID 
-						FROM $wpdb->posts 
-						WHERE post_type = '" . $object . "' AND post_status IN ('publish', 'pending', 'draft', 'private', 'future') 
-						ORDER BY post_date DESC
-					" );
+					$results = $wpdb->get_results(
+						$wpdb->prepare(
+							"
+							SELECT ID 
+							FROM $wpdb->posts 
+							WHERE post_type = %s 
+							AND post_status IN ('publish', 'pending', 'draft', 'private', 'future') 
+							ORDER BY post_title ASC
+							",
+							$object
+						)
+					);
 				}
 				foreach ( $results as $key => $result ) {
 					$wpdb->update( $wpdb->posts, array( 'menu_order' => $key + 1 ), array( 'ID' => $result->ID ) );
@@ -174,10 +216,10 @@ class MT_Sort_Engine {
 			}
 		}
 
-		wp_redirect( 'admin.php?page=mt_order-settings&msg=update' );
+		wp_safe_redirect( 'admin.php?page=mt_order-settings&msg=update' );
 	}
 
-	function mt_order_previous_post_where( $where ) {
+	public function mt_order_previous_post_where( $where ) {
 		global $post;
 
 		$objects = $this->get_mt_order_options_objects();
@@ -185,7 +227,7 @@ class MT_Sort_Engine {
 			return $where;
 		}
 
-		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects ) ) {
+		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects, true ) ) {
 			$current_menu_order = $post->menu_order;
 			$where              = "WHERE p.menu_order > '" . $current_menu_order . "' AND p.post_type = '" . $post->post_type . "' AND p.post_status = 'publish'";
 		}
@@ -193,7 +235,7 @@ class MT_Sort_Engine {
 		return $where;
 	}
 
-	function mt_order_previous_post_sort( $orderby ) {
+	public function mt_order_previous_post_sort( $orderby ) {
 		global $post;
 
 		$objects = $this->get_mt_order_options_objects();
@@ -201,14 +243,14 @@ class MT_Sort_Engine {
 			return $orderby;
 		}
 
-		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects ) ) {
+		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects, true ) ) {
 			$orderby = 'ORDER BY p.menu_order ASC LIMIT 1';
 		}
 
 		return $orderby;
 	}
 
-	function mt_order_next_post_where( $where ) {
+	public function mt_order_next_post_where( $where ) {
 		global $post;
 
 		$objects = $this->get_mt_order_options_objects();
@@ -216,7 +258,7 @@ class MT_Sort_Engine {
 			return $where;
 		}
 
-		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects ) ) {
+		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects, true ) ) {
 			$current_menu_order = $post->menu_order;
 			$where              = "WHERE p.menu_order < '" . $current_menu_order . "' AND p.post_type = '" . $post->post_type . "' AND p.post_status = 'publish'";
 		}
@@ -224,7 +266,7 @@ class MT_Sort_Engine {
 		return $where;
 	}
 
-	function mt_order_next_post_sort( $orderby ) {
+	public function mt_order_next_post_sort( $orderby ) {
 		global $post;
 
 		$objects = $this->get_mt_order_options_objects();
@@ -232,40 +274,36 @@ class MT_Sort_Engine {
 			return $orderby;
 		}
 
-		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects ) ) {
+		if ( isset( $post->post_type ) && in_array( $post->post_type, $objects, true ) ) {
 			$orderby = 'ORDER BY p.menu_order DESC LIMIT 1';
 		}
 
 		return $orderby;
 	}
 
-	function mt_order_pre_get_posts( $wp_query ) {
+	public function mt_order_pre_get_posts( $wp_query ) {
 		$objects = $this->get_mt_order_options_objects();
 		if ( empty( $objects ) ) {
 			return false;
 		}
 		if ( is_admin() ) {
-
 			if ( isset( $wp_query->query['post_type'] ) && ! isset( $_GET['orderby'] ) ) {
-				if ( in_array( $wp_query->query['post_type'], $objects ) ) {
+				if ( in_array( $wp_query->query['post_type'], $objects, true ) ) {
 					$wp_query->set( 'orderby', 'menu_order' );
 					$wp_query->set( 'order', 'ASC' );
 				}
 			}
 		} else {
-
 			$active = false;
 
 			if ( isset( $wp_query->query['post_type'] ) ) {
 				if ( ! is_array( $wp_query->query['post_type'] ) ) {
-					if ( in_array( $wp_query->query['post_type'], $objects ) ) {
+					if ( in_array( $wp_query->query['post_type'], $objects, true ) ) {
 						$active = true;
 					}
 				}
-			} else {
-				if ( in_array( 'post', $objects ) ) {
+			} elseif ( in_array( 'post', $objects, true ) ) {
 					$active = true;
-				}
 			}
 
 			if ( ! $active ) {
@@ -273,10 +311,10 @@ class MT_Sort_Engine {
 			}
 
 			if ( isset( $wp_query->query['suppress_filters'] ) ) {
-				if ( $wp_query->get( 'orderby' ) == 'date' ) {
+				if ( 'date' === $wp_query->get( 'orderby' ) ) {
 					$wp_query->set( 'orderby', 'menu_order' );
 				}
-				if ( $wp_query->get( 'order' ) == 'DESC' ) {
+				if ( 'DESC' === $wp_query->get( 'order' ) ) {
 					$wp_query->set( 'order', 'ASC' );
 				}
 			} else {
@@ -291,7 +329,7 @@ class MT_Sort_Engine {
 	}
 
 
-	function get_mt_order_options_objects() {
+	public function get_mt_order_options_objects() {
 		/**
 		 * Custom Post Types this is supposed to be working for.
 		 */
@@ -302,10 +340,11 @@ class MT_Sort_Engine {
 			'cpo_service',
 			'cpo_team',
 			'cpo_testimonial',
-			'cpo_client'
+			'cpo_client',
 		);
 
 		return $objects;
 	}
-
 }
+
+new MT_Sort_Engine();
